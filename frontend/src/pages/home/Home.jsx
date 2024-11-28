@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import PropTypes from "prop-types";
 import { logout } from "../../api/auth/authService";
 import { useNavigate } from "react-router-dom";
 
@@ -32,6 +33,10 @@ const Home = ({onLogoutSuccess}) => {
         <button onClick={handleSignOut}>Sign Out</button>
     </div>
   );
+};
+
+Home.propTypes = {
+  onLogoutSuccess: PropTypes.func.isRequired,
 };
 
 export default Home;
