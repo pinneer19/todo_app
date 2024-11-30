@@ -15,6 +15,7 @@ function App() {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
+        localStorage.removeItem('jwtToken')
       }
     };
     checkAuth();
@@ -25,8 +26,8 @@ function App() {
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home onLogoutSuccess={() => setIsAuthenticated(false)} />} />
+        <Route path="/login" element={<Login onLoginSuccess={() => setIsAuthenticated(true)}/>} />
+        <Route path="/home" element={isAuthenticated ? <Home onLogoutSuccess={() => setIsAuthenticated(false)} /> : <Navigate to="/"/>} />
       </Routes>
     </Router>
   );

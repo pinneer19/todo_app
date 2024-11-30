@@ -3,8 +3,9 @@ import { login } from '../../api/auth/authService';
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import "./auth.css";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({onLoginSuccess}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ const Login = () => {
       const response = await login(username, password);
       localStorage.setItem('jwtToken', response.token);
       
+      onLoginSuccess();
       navigate("/home");
     } catch (err) {
       setError("Invalid username or password. Please try again");
@@ -49,6 +51,10 @@ const Login = () => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  onLoginSuccess: PropTypes.func.isRequired,
 };
 
 export default Login;

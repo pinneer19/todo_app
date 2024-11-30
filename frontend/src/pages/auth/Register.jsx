@@ -22,7 +22,9 @@ const Register = () => {
       
       navigate("/home");
     } catch (err) {
-      const errorMessage= err.response.data.errors.map(error => error.defaultMessage).join("\n");
+      const errors = err.response.data.errors;
+      const errorMessage = errors ? errors.map(error => error.defaultMessage).join("\n") : "Error was occured. Please try again";;
+      
       setError(errorMessage);
     } finally {
       setLoading(false);
