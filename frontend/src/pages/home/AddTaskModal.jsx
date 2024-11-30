@@ -13,14 +13,17 @@ const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
     };
 
     return (
-        <div className="modal-overlay" onClick={handleOverlayClick}>
+        <button
+            className="modal-overlay"
+            onClick={handleOverlayClick}
+        >
             <div className="modal">
                 <h2>{initialData ? "Update Task" : "Add New Task"}</h2>
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
                         const formData = new FormData(e.target);
-                        const taskDto = new TaskDto(
+                        const taskDto = TaskDto(
                             formData.get('title'),
                             formData.get('description'),
                             formData.get('finishDate'),
@@ -31,16 +34,32 @@ const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
                     }}
                 >
                     <div>
-                        <label>Title:</label>
-                        <input type="text" name="title" required defaultValue={initialData?.title || ""}/>
+                        <label htmlFor="title">Title:</label>
+                        <input
+                            type="text"
+                            id="title" 
+                            name="title"
+                            required
+                            defaultValue={initialData?.title || ""}
+                        />
                     </div>
                     <div>
-                        <label>Description:</label>
-                        <textarea name="description" defaultValue={initialData?.description || ""}></textarea>
+                        <label htmlFor="description">Description:</label>
+                        <textarea
+                            name="description"
+                            id="description"
+                            defaultValue={initialData?.description || ""}
+                        />
                     </div>
                     <div>
-                        <label>Finish Date:</label>
-                        <input type="date" name="finishDate" required defaultValue={initialData?.finishDate || ""} />
+                        <label htmlFor="finishDate">Finish Date:</label>
+                        <input
+                            type="date"
+                            id="finishDate"
+                            name="finishDate"
+                            required
+                            defaultValue={initialData?.finishDate || ""}
+                        />
                     </div>
                     <button type="submit">{initialData ? "Save" : "Add"}</button>
                     <button type="button" onClick={onClose}>
@@ -48,7 +67,7 @@ const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
                     </button>
                 </form>
             </div>
-        </div>
+        </button>
     );
 };
 

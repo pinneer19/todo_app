@@ -57,7 +57,7 @@ const Home = ({onLogoutSuccess}) => {
   const handleAddTask = (taskDto) => executeTaskAction(() => createTask(taskDto));
   const handleUpdateTask = (taskId, taskDto) => executeTaskAction(() => updateTask(taskId, taskDto));
   const handleCompleteTask = (task) => {
-    const dto = new TaskDto(task.title, task.description, task.finishDate, true);
+    const dto = TaskDto(task.title, task.description, task.finishDate, true);
     executeTaskAction(() => updateTask(task.id, dto));
   };
   const handleDeleteTask = (taskId) => executeTaskAction(() => deleteTask(taskId));
@@ -144,22 +144,17 @@ const Home = ({onLogoutSuccess}) => {
                 <option value="createdAt">Creation Date</option>
                 <option value="finishDate">Finish Date</option>
             </select>
-            <div className="sorting-select">
-              <span
-                    className={`sort-direction ${filters.sortDirection === 'asc' ? 'asc' : 'desc'}`}
-                    onClick={handleSortDirectionChange}
-              >
-                <i className={filters.sortDirection === 'asc' ? "fa-solid fa-sort-up" : "fa-solid fa-sort-down"}/>
-              </span>
-            </div>
+            <button className="sort-direction" onClick={handleSortDirectionChange}>
+              <i className={filters.sortDirection === 'asc' ? "fa-solid fa-sort-up" : "fa-solid fa-sort-down"}/>
+            </button>
             {error && <div className="error-block">{error}</div>}
           </div>
         </div>
           
         <div className="task-grid-container">
           <div className="task-grid">
-            {tasks && tasks.map((task) => (
-              <div
+            {tasks?.map((task) => (
+              <button
                   className={`task-card ${task.completed ? 'completed' : 'not-completed'}`}
                   key={task.id}
                   onClick={() => {
@@ -175,6 +170,12 @@ const Home = ({onLogoutSuccess}) => {
                           onClick={(e) => {
                               e.stopPropagation();
                               handleDeleteTask(task.id);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              e.stopPropagation();
+                              handleDeleteTask(task.id);
+                            }
                           }}
                       >
                         <i className="fas fa-trash-alt" />
@@ -194,7 +195,7 @@ const Home = ({onLogoutSuccess}) => {
                 </div>
                 <p className="description">{task.description}</p>
                 <p className="date">Deadline {new Date(task.finishDate).toLocaleDateString('ru-ru')}</p>
-              </div>
+              </button>
             ))}
           </div>
         </div>

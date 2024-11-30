@@ -8,6 +8,10 @@ import java.time.LocalDate;
 
 public class TaskSpecification {
 
+    private TaskSpecification() {
+        // not called
+    }
+
     public static Specification<Task> hasStatus(Boolean completed) {
         return (root, query, builder) -> {
             if (completed != null) {

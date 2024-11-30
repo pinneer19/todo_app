@@ -5,3 +5,5 @@
 **2. CRUD**
 - Estimated: 27h
 - Real: 28h
+
+SonarCloud: https://sonarcloud.io/organizations/pinneer19/projects

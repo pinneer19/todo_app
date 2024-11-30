@@ -1,3 +1,7 @@
+button {
+    all: unset;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
