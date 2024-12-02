@@ -68,7 +68,7 @@ public class TaskController {
     @PutMapping("/{taskId}")
     public ResponseEntity<Task> updateTask(
             @PathVariable("taskId") Long taskId,
-            @RequestBody Task updatedTask,
+            @Valid @RequestBody Task updatedTask,
             Principal principal
     ) {
         verifyTaskOwnership(taskId, principal);

@@ -250,6 +250,9 @@
 
 .error-block {
     margin-bottom: 20px;
+    max-width: 80%;
+    width: auto;
+    justify-self: center;
     padding: 12px;
     background: rgba(255, 0, 0, 0.1);
     color: #d9534f;

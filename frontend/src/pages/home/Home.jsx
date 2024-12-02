@@ -50,7 +50,18 @@ const Home = ({onLogoutSuccess}) => {
       await action();
       fetchTasks();
     } catch (e) {
-      setError(e);
+      const errors = e.response?.data || {};
+      const { title, description, finishDate, error } = errors;
+  
+      let errorMessages = [];
+      if (title) errorMessages.push(title);
+      if (description) errorMessages.push(description);
+      if (finishDate) errorMessages.push(finishDate);
+      if (error) errorMessages.push(error);
+  
+      const errorMessage = errorMessages.join("\n");
+  
+      setError(errorMessage || "Task action was failed. Please try again");
     }
   };
 
@@ -147,10 +158,9 @@ const Home = ({onLogoutSuccess}) => {
             <button className="sort-direction" onClick={handleSortDirectionChange}>
               <i className={filters.sortDirection === 'asc' ? "fa-solid fa-sort-up" : "fa-solid fa-sort-down"}/>
             </button>
-            {error && <div className="error-block">{error}</div>}
           </div>
         </div>
-          
+        {error && <div className="error-block">{error}</div>}
         <div className="task-grid-container">
           <div className="task-grid">
             {tasks?.map((task) => (
