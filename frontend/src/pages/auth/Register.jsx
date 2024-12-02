@@ -23,8 +23,7 @@ const Register = () => {
       navigate("/home");
     } catch (err) {
         const errors = err.response.data;
-
-        const errorMessage = errors ? [errors.username, errors.password].filter(Boolean).join('\n') : "Error occurred. Please try again.";
+        const errorMessage = errors ? [errors.username, errors.password, errors.error].filter(Boolean).join('\n') : "Error occurred. Please try again.";
 
         setError(errorMessage);
     } finally {
