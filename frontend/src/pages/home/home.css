@@ -105,6 +105,8 @@
 
 .task-card h3 {
     font-size: 1.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: bold;
     color: #2c3e50;
     margin: 0;
@@ -120,6 +122,8 @@
 
 .task-card p.description {
     font-size: 1.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.8);
 }

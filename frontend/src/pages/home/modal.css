@@ -47,7 +47,7 @@ button {
 }
 
 .modal form textarea {
-    resize: vertical;
+    resize: none;
     max-height: 50vh;
 }
 

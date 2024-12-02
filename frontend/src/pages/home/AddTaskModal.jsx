@@ -1,22 +1,38 @@
-import React from "react";
+import React, {useRef, useEffect} from "react";
 import TaskDto from "../../api/home/taskDto";
 import "./modal.css"
 import PropTypes from "prop-types";
 
 const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
-    if (!isOpen) return null;
+    const textAreaRef = useRef(null);
 
-    const handleOverlayClick = (e) => {
-        if (e.target.className === "modal-overlay") {
-            onClose();
+    const autoExpand = (e) => {
+        const textarea = e.target;
+        const maxScrollHeight = window.innerHeight * 0.5; // 50vh
+    
+        textarea.style.height = "auto";
+        textarea.style.overflowY = "hidden";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+    
+        if (textarea.scrollHeight > maxScrollHeight) {
+            textarea.style.height = `${maxScrollHeight}px`;
+            textarea.style.overflowY = "auto";
+        } else {
+            textarea.style.overflowY = "hidden";
         }
     };
 
+    useEffect(() => {
+        if (isOpen && textAreaRef.current) {
+            textAreaRef.current.style.height = "auto";
+            textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+        }
+    }, [isOpen, initialData]);
+
+    if (!isOpen) return null;
+
     return (
-        <button
-            className="modal-overlay"
-            onClick={handleOverlayClick}
-        >
+        <div className="modal-overlay">
             <div className="modal">
                 <h2>{initialData ? "Update Task" : "Add New Task"}</h2>
                 <form
@@ -40,6 +56,7 @@ const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
                             id="title" 
                             name="title"
                             required
+                            maxLength={255}
                             defaultValue={initialData?.title || ""}
                         />
                     </div>
@@ -48,7 +65,10 @@ const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
                         <textarea
                             name="description"
                             id="description"
+                            maxLength={500}
                             defaultValue={initialData?.description || ""}
+                            ref={textAreaRef}
+                            onInput={autoExpand}
                         />
                     </div>
                     <div>
@@ -67,7 +87,7 @@ const AddTaskModal = ({ isOpen, onClose, onSubmit, initialData }) => {
                     </button>
                 </form>
             </div>
-        </button>
+        </div>
     );
 };
 

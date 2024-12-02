@@ -6,4 +6,8 @@
 - Estimated: 27h
 - Real: 28h
 
+**3. DB**
+- Estimated: 0.5h
+- Real: 0.5h
+
 SonarCloud: https://sonarcloud.io/organizations/pinneer19/projects

@@ -32,9 +32,11 @@
 .auth-form .btn-primary {
     width: 100%;
     padding: 12px;
+    margin-top: 10px;
     background: #6b73ff;
     color: #fff;
     border: none;
+    box-sizing: border-box;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
