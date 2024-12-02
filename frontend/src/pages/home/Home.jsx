@@ -163,7 +163,7 @@ const Home = ({onLogoutSuccess}) => {
                   }}
               >
                 <div className="task-card-header">
-                    <h3 className={`status ${task.completed ? 'completed' : 'not-completed'}`}>{task.title}</h3>
+                    <h3 className={`status ${task.completed ? 'completed' : 'not-completed'}`} title={task.title}>{task.title}</h3>
                     <div className="action-buttons">
                       <button
                           className="delete-btn"
@@ -193,7 +193,7 @@ const Home = ({onLogoutSuccess}) => {
                       )}
                     </div>
                 </div>
-                <p className="description">{task.description}</p>
+                <p className="description" title={task.description}>{task.description}</p>
                 <p className="date">Deadline {new Date(task.finishDate).toLocaleDateString('ru-ru')}</p>
               </button>
             ))}
